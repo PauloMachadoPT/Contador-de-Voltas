@@ -1,32 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import './styles.css'
 //letras maiusculas para componentes e minusculas para elementos
 //Voltas
-const MostraVoltas = (props) => {
-  return(
-    <p>
-      {props.voltas}<br/>
-      Voltas
-    </p>
-  )
-}
+import MostraVoltas from './MostraVoltas'
 // Mostrar tempo
-const MostraTempo = (props) =>{
-  const tempo = props.tempo
-  const minutos = Math.ceil (tempo / 60)// passar inteiro em minutos
-  const segundos = tempo % 60 // resto da disivao por minutos
-  return (
-    <p>
-      {'${minutos}:${segundos}'}<br/>
-      Tempo médio por volta
-  </p>
-  )
-}
+import MostraTempo from './MostraTempo'
 //Botões
-const Button = (props) => <button onClick={props.onClick}>{props.text}</button>
+import Button from './Button'
 
 function App() {
-  const [numVoltas, setNumVoltas] = useState (14)
-  const [running, setRunning] = useState(false)
+  const [numVoltas, setNumVoltas] = useState (0)
+  const [running, setRunning] = useState(false) // verificar se o contador está a contar
   const toggleRunning = () => {
     setRunning(!running) //inverte o valor de running
   }
@@ -52,18 +36,26 @@ function App() {
    // console.log('increment')
   }
   const decrement = () => {
+    if (numVoltas > 0) //nao permitir voltas negativas
     setNumVoltas(numVoltas - 1)
    //console.log('decrement')
   }
-
+  const reset = () => {
+    setNumVoltas (0)
+    setTempo (0)
+  }
   return (
     <div>
       <MostraVoltas voltas={numVoltas} />
-      <Button text='+' onClick={increment} />
-      <Button text='-' onClick={decrement} />
-      <MostraTempo tempo = {tempo} />
-      <Button onClick = {toggleRunning} text='Iniciar' />
-      <Button text='Reiniciar' />
+      <Button text='+' className='bigger' onClick={increment} />
+      <Button text='-' className='bigger' onClick={decrement} />
+      {
+        numVoltas > 0 && // só mostra tempo se o número de voltas > 0
+        <MostraTempo tempo = {Math.round(tempo/numVoltas)} />
+      }
+      
+      <Button onClick = {toggleRunning} text={running ? 'Parar' : 'Iniciar'} />
+      <Button onclick = {reset} text='Reiniciar' />
     </div>
   )
 }

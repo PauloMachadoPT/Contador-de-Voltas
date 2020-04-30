@@ -1,0 +1,37 @@
+@import url('//fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+}
+.voltas {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+/* quando existe a tag span */
+
+.voltas span { 
+    font-size: 288px;
+    font-weight: bold;
+}
+
+button {
+   background-color: #f9f9f9; 
+   border: 1 px solid black;
+   font-size: 18px;
+   padding: 22px;
+   margin: 8px;
+}
+
+.tempo span{
+    font-weight: bold;
+    font-size: 64px;
+
+}
+
+.bigger {
+    font-size: 90px;
+    font-weight: bold;
+    line-height: 90px;
+}
